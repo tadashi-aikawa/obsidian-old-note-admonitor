@@ -1,0 +1,20 @@
+version: "3"
+
+tasks:
+  default:
+    - task: help
+
+  help:
+    silent: true
+    cmds:
+      - task -l
+
+  build:dev: npm run dev
+
+  watch: watchexec --no-vcs-ignore --exts "js,json,css" cp main.js styles.css manifest.json $USERPROFILE/work/minerva/.obsidian/plugins/obsidian-old-note-audit/
+
+  dev:
+    desc: Build and copy files when they are updated.
+    deps:
+      - build:dev
+      - watch
