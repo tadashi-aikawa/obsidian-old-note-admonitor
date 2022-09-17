@@ -6,6 +6,7 @@ interface Settings {}
 
 const DEFAULT_SETTINGS: Settings = {};
 
+// noinspection JSUnusedGlobalSymbols
 export default class OldNoteAdmonitorPlugin extends Plugin {
   appHelper: AppHelper;
   settings: Settings;

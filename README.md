@@ -4,8 +4,6 @@
 
 - [ ] Set a `Min number of days to show a warning`
 - [ ] Set a `Date to be referred`
-- [ ] Set a `Warning icon` (lucide-icons)
-- [ ] Set a `Warning color`
 - [ ] Set a `Warning message`
 
 ## 👥 For users
