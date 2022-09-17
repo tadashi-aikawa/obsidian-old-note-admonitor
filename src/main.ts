@@ -1,10 +1,7 @@
-import { App, EventRef, Plugin, PluginSettingTab } from "obsidian";
+import { EventRef, Plugin } from "obsidian";
 import dayjs from "dayjs";
 import { AppHelper } from "./app-helper";
-
-interface Settings {}
-
-const DEFAULT_SETTINGS: Settings = {};
+import { DEFAULT_SETTINGS, OldNoteAdmonitorTab, Settings } from "./settings";
 
 // noinspection JSUnusedGlobalSymbols
 export default class OldNoteAdmonitorPlugin extends Plugin {
@@ -15,7 +12,7 @@ export default class OldNoteAdmonitorPlugin extends Plugin {
   async onload() {
     this.appHelper = new AppHelper(this.app);
     await this.loadSettings();
-    this.addSettingTab(new SampleSettingTab(this.app, this));
+    this.addSettingTab(new OldNoteAdmonitorTab(this.app, this));
 
     this.fileOpenHandler = this.app.workspace.on("file-open", async (file) => {
       const markdownView = this.appHelper.getMarkdownViewInActiveLeaf()!;
@@ -38,7 +35,7 @@ export default class OldNoteAdmonitorPlugin extends Plugin {
       }
 
       const pastDays = dayjs().diff(dayjs(lastUpdated), "day");
-      if (pastDays > 180) {
+      if (pastDays > this.settings.minNumberOfDaysToShowWarning) {
         markdownView.containerEl.createDiv({
           text: `The content has been no updated for over ${pastDays} days`,
           cls,
@@ -57,22 +54,5 @@ export default class OldNoteAdmonitorPlugin extends Plugin {
 
   async saveSettings() {
     await this.saveData(this.settings);
-  }
-}
-
-class SampleSettingTab extends PluginSettingTab {
-  plugin: OldNoteAdmonitorPlugin;
-
-  constructor(app: App, plugin: OldNoteAdmonitorPlugin) {
-    super(app, plugin);
-    this.plugin = plugin;
-  }
-
-  display(): void {
-    const { containerEl } = this;
-
-    containerEl.empty();
-
-    containerEl.createEl("h2", { text: "Main" });
   }
 }
