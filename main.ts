@@ -6,7 +6,7 @@ interface Settings {}
 
 const DEFAULT_SETTINGS: Settings = {};
 
-export default class OldNoteAuditPlugin extends Plugin {
+export default class OldNoteAdmonitorPlugin extends Plugin {
   appHelper: AppHelper;
   settings: Settings;
   fileOpenHandler: EventRef;
@@ -22,7 +22,7 @@ export default class OldNoteAuditPlugin extends Plugin {
         return;
       }
 
-      const cls = "old-note-audit__old-note-container";
+      const cls = "old-note-admonitor__old-note-container";
       markdownView.containerEl.find(`.${cls}`)?.remove();
 
       const content = await app.vault.cachedRead(file);
@@ -60,9 +60,9 @@ export default class OldNoteAuditPlugin extends Plugin {
 }
 
 class SampleSettingTab extends PluginSettingTab {
-  plugin: OldNoteAuditPlugin;
+  plugin: OldNoteAdmonitorPlugin;
 
-  constructor(app: App, plugin: OldNoteAuditPlugin) {
+  constructor(app: App, plugin: OldNoteAdmonitorPlugin) {
     super(app, plugin);
     this.plugin = plugin;
   }
