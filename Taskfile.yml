@@ -9,6 +9,11 @@ tasks:
     cmds:
       - task -l
 
+  init:
+    desc: Install dependencies
+    cmds:
+      - npm install
+
   build:dev: npm run dev
 
   watch: watchexec --no-vcs-ignore --exts "js,json,css" cp main.js styles.css manifest.json $USERPROFILE/work/minerva/.obsidian/plugins/obsidian-old-note-admonitor/
