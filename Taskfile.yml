@@ -15,7 +15,7 @@ tasks:
       - npm install
 
   build:dev: npm run dev
-
+  build: npm run build
   watch: watchexec --no-vcs-ignore --exts "js,json,css" cp main.js styles.css manifest.json $USERPROFILE/work/minerva/.obsidian/plugins/obsidian-old-note-admonitor/
 
   dev:
@@ -23,3 +23,27 @@ tasks:
     deps:
       - build:dev
       - watch
+
+  ci:
+    desc: For CI
+    cmds:
+      - task: init
+      - task: build
+#      - task: test
+
+  release:
+    desc: |
+      Build
+          ∟ [Ex] task release VERSION=1.2.3
+    deps:
+      - ci
+    cmds:
+      - npm version {{.VERSION}}
+      - npm run version
+      - task: ci
+      - git push --tags
+      - git push
+    preconditions:
+      - sh: "[ {{.VERSION}} != '' ]"
+        msg: "VERSION is required."
+
