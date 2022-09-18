@@ -1,6 +1,6 @@
 {
   "name": "obsidian-old-note-admonitor",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Todo",
   "main": "main.js",
   "scripts": {
