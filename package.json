@@ -1,7 +1,7 @@
 {
   "name": "obsidian-old-note-admonitor",
   "version": "0.1.2",
-  "description": "Todo",
+  "description": "This Obsidian plugin shows warnings if the note has not been updated for over specific days",
   "main": "main.js",
   "scripts": {
     "dev": "node esbuild.config.mjs",
