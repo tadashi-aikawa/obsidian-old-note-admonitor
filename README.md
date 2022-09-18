@@ -58,11 +58,11 @@ The `Front matter key` option can specify any key name.
 
 ##### Capture group
 
-If you set `// updated: (?<date>[0-9]{4}/[0-9]{2}/[0-9]{2})` to `Capture group pattern`, the date is extracted as follows.
+If you set `^// updated: (?<date>[0-9]{4}/[0-9]{2}/[0-9]{2})` to `Capture group pattern`, the date is extracted as follows.
 
 ![capture-group](https://raw.githubusercontent.com/tadashi-aikawa/obsidian-old-note-admonitor/master/resources/capture-group.png)
 
-`Default: // (?<date>[0-9]{4}/[0-9]{2}/[0-9]{2})`
+`Default: ^// (?<date>[0-9]{4}/[0-9]{2}/[0-9]{2})`
 
 ### 🎨 Styles
 

@@ -72,7 +72,13 @@ export default class OldNoteAdmonitorPlugin extends Plugin {
       case "Capture group":
         const content = await app.vault.cachedRead(file);
         const pattern = new RegExp(this.settings.captureGroupPattern, "g");
-        const dc = Array.from(content.matchAll(pattern)).first()?.groups?.date;
+        const dc = content
+          .split("\n")
+          .map(
+            (line) => Array.from(line.matchAll(pattern)).first()?.groups?.date
+          )
+          .filter((x) => x)
+          .first();
         return dc ? dayjs(dc) : undefined;
       default:
         throw new ExhaustiveError(this.settings.dateToBeReferred);

@@ -23,7 +23,7 @@ export const DEFAULT_SETTINGS: Settings = {
     "The content has been no updated for over ${numberOfDays} days",
   dateToBeReferred: "Modified time",
   frontMatterKey: "updated",
-  captureGroupPattern: `// (?<date>[0-9]{4}/[0-9]{2}/[0-9]{2})`,
+  captureGroupPattern: `^// (?<date>[0-9]{4}/[0-9]{2}/[0-9]{2})`,
 };
 
 export class OldNoteAdmonitorTab extends PluginSettingTab {
