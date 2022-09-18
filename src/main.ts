@@ -61,15 +61,15 @@ export default class OldNoteAdmonitorPlugin extends Plugin {
 
   async findDate(file: TFile): Promise<dayjs.Dayjs | undefined> {
     switch (this.settings.dateToBeReferred) {
-      case "modified time":
+      case "Modified time":
         return dayjs(file.stat.mtime);
-      case "front-matter":
+      case "Front matter":
         const df =
           app.metadataCache.getFileCache(file)?.frontmatter?.[
             this.settings.frontMatterKey
           ];
         return df ? dayjs(df) : undefined;
-      case "capture-group":
+      case "Capture group":
         const content = await app.vault.cachedRead(file);
         const pattern = new RegExp(this.settings.captureGroupPattern, "g");
         const dc = Array.from(content.matchAll(pattern)).first()?.groups?.date;

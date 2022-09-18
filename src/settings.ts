@@ -3,9 +3,9 @@ import OldNoteAdmonitorPlugin from "./main";
 import { mirror } from "./collections";
 
 const dateToBeReferredList = [
-  "modified time",
-  "front-matter",
-  "capture-group",
+  "Modified time",
+  "Front matter",
+  "Capture group",
 ] as const;
 export type DateToBeReferred = typeof dateToBeReferredList[number];
 
@@ -21,7 +21,7 @@ export const DEFAULT_SETTINGS: Settings = {
   minNumberOfDaysToShowWarning: 180,
   messageTemplate:
     "The content has been no updated for over ${numberOfDays} days",
-  dateToBeReferred: "modified time",
+  dateToBeReferred: "Modified time",
   frontMatterKey: "updated",
   captureGroupPattern: `// (?<date>[0-9]{4}/[0-9]{2}/[0-9]{2})`,
 };
@@ -78,7 +78,7 @@ export class OldNoteAdmonitorTab extends PluginSettingTab {
         })
     );
 
-    if (this.plugin.settings.dateToBeReferred === "front-matter") {
+    if (this.plugin.settings.dateToBeReferred === "Front matter") {
       new Setting(containerEl).setName("Front matter key").addText((tc) => {
         return tc
           .setValue(String(this.plugin.settings.frontMatterKey))
@@ -89,7 +89,7 @@ export class OldNoteAdmonitorTab extends PluginSettingTab {
       });
     }
 
-    if (this.plugin.settings.dateToBeReferred === "capture-group") {
+    if (this.plugin.settings.dateToBeReferred === "Capture group") {
       new Setting(containerEl)
         .setName("Capture group pattern")
         .setDesc(
