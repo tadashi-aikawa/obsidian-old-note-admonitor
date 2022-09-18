@@ -1,4 +1,11 @@
-import { App, MarkdownView, Vault, Workspace, WorkspaceLeaf } from "obsidian";
+import {
+  App,
+  MarkdownView,
+  TFile,
+  Vault,
+  Workspace,
+  WorkspaceLeaf,
+} from "obsidian";
 
 interface UnsafeAppInterface {
   internalPlugins: {
@@ -40,6 +47,10 @@ export class AppHelper {
 
   constructor(app: App) {
     this.unsafeApp = app as any;
+  }
+
+  getActiveFile(): TFile | null {
+    return this.unsafeApp.workspace.getActiveFile();
   }
 
   getMarkdownViewInActiveLeaf(): MarkdownView | null {
