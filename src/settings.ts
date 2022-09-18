@@ -1,6 +1,6 @@
 import { App, PluginSettingTab, Setting } from "obsidian";
 import OldNoteAdmonitorPlugin from "./main";
-import { mirror, mirrorMap } from "./collections";
+import { mirror } from "./collections";
 
 const dateToBeReferredList = [
   "modified time",
