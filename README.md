@@ -1,11 +1,5 @@
 # Old Note Admonitor
 
-## Roadmap
-
-- [ ] Set a `Min number of days to show a warning`
-- [ ] Set a `Date to be referred`
-- [ ] Set a `Warning message`
-
 ## 👥 For users
 
 ### ⏬ Install
