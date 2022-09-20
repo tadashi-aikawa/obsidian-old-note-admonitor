@@ -50,12 +50,15 @@ export default class OldNoteAdmonitorPlugin extends Plugin {
 
     const numberOfDays = dayjs().diff(lastUpdated, "day");
     if (numberOfDays > this.settings.minNumberOfDaysToShowWarning) {
-      markdownView.containerEl.createDiv({
+      const el = createDiv({
         text: this.settings.messageTemplate
           .replace("${numberOfDays}", String(numberOfDays))
           .replace("${date}", lastUpdated.format("YYYY-MM-DD")),
         cls,
       });
+      markdownView.containerEl
+        .find(".view-header")
+        .insertAdjacentElement("beforebegin", el);
     }
   }
 
