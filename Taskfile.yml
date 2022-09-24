@@ -29,7 +29,7 @@ tasks:
     cmds:
       - task: init
       - task: build
-#      - task: test
+  #      - task: test
 
   release:
     desc: |
@@ -39,11 +39,9 @@ tasks:
       - ci
     cmds:
       - npm version {{.VERSION}}
-      - npm run version
       - task: ci
       - git push --tags
       - git push
     preconditions:
       - sh: "[ {{.VERSION}} != '' ]"
         msg: "VERSION is required."
-
