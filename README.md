@@ -16,7 +16,6 @@ You can download via [BRAT].
 
 > **Warning**
 > - This plugin support Obsidian 0.16 or over
-> - This plugin doesn't support mobile so far
 
 ### ⚙ Settings
 
