@@ -54,10 +54,6 @@ export class AppHelper {
   }
 
   getMarkdownViewInActiveLeaf(): MarkdownView | null {
-    if (!this.unsafeApp.workspace.getActiveViewOfType(MarkdownView)) {
-      return null;
-    }
-
-    return this.unsafeApp.workspace.activeLeaf!.view as MarkdownView;
+    return this.unsafeApp.workspace.getActiveViewOfType(MarkdownView);
   }
 }
