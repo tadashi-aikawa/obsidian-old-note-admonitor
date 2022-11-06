@@ -1,6 +1,7 @@
 import { App, PluginSettingTab, Setting } from "obsidian";
 import OldNoteAdmonitorPlugin from "./main";
 import { mirror } from "./collections";
+import { smartLineBreakSplit } from "./utils/strings";
 
 const dateToBeReferredList = [
   "Modified time",
@@ -12,18 +13,22 @@ export type DateToBeReferred = typeof dateToBeReferredList[number];
 export interface Settings {
   minNumberOfDaysToShowWarning: number;
   messageTemplate: string;
+  showWarningIfDataIsNotFound: boolean;
   dateToBeReferred: DateToBeReferred;
   frontMatterKey: string;
   captureGroupPattern: string;
+  excludePrefixPathPatterns: string[];
 }
 
 export const DEFAULT_SETTINGS: Settings = {
   minNumberOfDaysToShowWarning: 180,
   messageTemplate:
     "The content has been no updated for over ${numberOfDays} days",
+  showWarningIfDataIsNotFound: false,
   dateToBeReferred: "Modified time",
   frontMatterKey: "updated",
   captureGroupPattern: `^// (?<date>[0-9]{4}/[0-9]{2}/[0-9]{2})`,
+  excludePrefixPathPatterns: [],
 };
 
 export class OldNoteAdmonitorTab extends PluginSettingTab {
@@ -107,5 +112,35 @@ export class OldNoteAdmonitorTab extends PluginSettingTab {
             });
         });
     }
+
+    new Setting(containerEl)
+      .setName("Show a warning if the date is not found")
+      .addToggle((cb) =>
+        cb
+          .setValue(this.plugin.settings.showWarningIfDataIsNotFound)
+          .onChange(async (value) => {
+            this.plugin.settings.showWarningIfDataIsNotFound = value;
+            await this.plugin.saveSettings();
+          })
+      );
+
+    new Setting(containerEl)
+      .setName("Exclude prefix path patterns")
+      .setDesc(
+        "If set, It doesn't show a warning in the file whose path starts with one of the patterns. It can set multi patterns by line breaks."
+      )
+      .addTextArea((tc) => {
+        const el = tc
+          .setPlaceholder("(ex: Notes/Private)")
+          .setValue(this.plugin.settings.excludePrefixPathPatterns.join("\n"))
+          .onChange(async (value) => {
+            this.plugin.settings.excludePrefixPathPatterns =
+              smartLineBreakSplit(value);
+          });
+        el.inputEl.className =
+          "old-note-admonitor____settings__exclude_path_patterns";
+
+        return el;
+      });
   }
 }
