@@ -67,6 +67,30 @@ If you set `^// updated: (?<date>[0-9]{4}/[0-9]{2}/[0-9]{2})` to `Capture group 
 
 `Default: ^// (?<date>[0-9]{4}/[0-9]{2}/[0-9]{2})`
 
+##### Exclude prefix path patterns
+
+If set, It doesn't show a warning in the file whose path starts with one of the patterns. It can set multi patterns by line breaks.
+
+For example, You want to ignore the following files.
+
+- `Daily Report/10/2022-10-01.md`
+- `Daily Report/10/2022-10-02.md`
+- `Daily Report/11/2022-11-05.md`
+- `Daily Report/11/2022-11-06.md`
+
+You have to set
+
+```
+Daily Report/
+```
+
+or
+
+```
+Daily Report/10/
+Daily Report/11/
+```
+
 ### 🎨 Styles
 
 You can customize the style of warnings by editing the following classes.
