@@ -150,6 +150,7 @@ export class OldNoteAdmonitorTab extends PluginSettingTab {
           .onChange(async (value) => {
             this.plugin.settings.excludePrefixPathPatterns =
               smartLineBreakSplit(value);
+            await this.plugin.saveSettings();
           });
         el.inputEl.className =
           "old-note-admonitor____settings__exclude_path_patterns";
