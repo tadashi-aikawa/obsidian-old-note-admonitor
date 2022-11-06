@@ -11,6 +11,7 @@ export default class OldNoteAdmonitorPlugin extends Plugin {
   appHelper: AppHelper;
   settings: Settings;
   fileOpenHandler: EventRef;
+  fileSaveHandler: EventRef;
 
   async onload() {
     this.appHelper = new AppHelper(this.app);
@@ -18,13 +19,27 @@ export default class OldNoteAdmonitorPlugin extends Plugin {
     this.addSettingTab(new OldNoteAdmonitorTab(this.app, this));
 
     await this.exec(this.appHelper.getActiveFile());
-    this.fileOpenHandler = this.app.workspace.on("file-open", (file) =>
-      this.exec(file)
-    );
+    this.addListeners();
   }
 
   onunload() {
+    this.removeListeners();
+  }
+
+  addListeners() {
+    this.fileOpenHandler = this.app.workspace.on("file-open", (file) =>
+      this.exec(file)
+    );
+    if (this.settings.triggerToUpdate === "On open or save file") {
+      this.fileSaveHandler = this.app.vault.on("modify", (file) => {
+        this.exec(file as TFile);
+      });
+    }
+  }
+
+  removeListeners() {
     this.app.workspace.offref(this.fileOpenHandler);
+    this.app.vault.offref(this.fileSaveHandler);
   }
 
   async loadSettings() {
@@ -33,6 +48,8 @@ export default class OldNoteAdmonitorPlugin extends Plugin {
 
   async saveSettings() {
     await this.saveData(this.settings);
+    this.removeListeners();
+    this.addListeners();
     await this.exec(this.appHelper.getActiveFile());
   }
 

@@ -10,10 +10,14 @@ const dateToBeReferredList = [
 ] as const;
 export type DateToBeReferred = typeof dateToBeReferredList[number];
 
+const triggerToUpdateList = ["On open file", "On open or save file"] as const;
+export type TriggerToUpdate = typeof triggerToUpdateList[number];
+
 export interface Settings {
   minNumberOfDaysToShowWarning: number;
   messageTemplate: string;
   showWarningIfDataIsNotFound: boolean;
+  triggerToUpdate: TriggerToUpdate;
   dateToBeReferred: DateToBeReferred;
   frontMatterKey: string;
   captureGroupPattern: string;
@@ -25,6 +29,7 @@ export const DEFAULT_SETTINGS: Settings = {
   messageTemplate:
     "The content has been no updated for over ${numberOfDays} days",
   showWarningIfDataIsNotFound: false,
+  triggerToUpdate: "On open file",
   dateToBeReferred: "Modified time",
   frontMatterKey: "updated",
   captureGroupPattern: `^// (?<date>[0-9]{4}/[0-9]{2}/[0-9]{2})`,
@@ -45,18 +50,6 @@ export class OldNoteAdmonitorTab extends PluginSettingTab {
     containerEl.empty();
 
     containerEl.createEl("h2", { text: "Old Note Admonitor - Settings" });
-
-    new Setting(containerEl)
-      .setName("Min number of days to show a warning")
-      .addText((tc) => {
-        tc.inputEl.type = "number";
-        return tc
-          .setValue(String(this.plugin.settings.minNumberOfDaysToShowWarning))
-          .onChange(async (value) => {
-            this.plugin.settings.minNumberOfDaysToShowWarning = Number(value);
-            await this.plugin.saveSettings();
-          });
-      });
 
     new Setting(containerEl)
       .setName("Message template")
@@ -112,6 +105,27 @@ export class OldNoteAdmonitorTab extends PluginSettingTab {
             });
         });
     }
+
+    new Setting(containerEl)
+      .setName("Min number of days to show a warning")
+      .addText((tc) => {
+        tc.inputEl.type = "number";
+        return tc
+          .setValue(String(this.plugin.settings.minNumberOfDaysToShowWarning))
+          .onChange(async (value) => {
+            this.plugin.settings.minNumberOfDaysToShowWarning = Number(value);
+            await this.plugin.saveSettings();
+          });
+      });
+
+    new Setting(containerEl).setName("Trigger to update").addDropdown((dc) => {
+      dc.addOptions(mirror([...triggerToUpdateList]))
+        .setValue(this.plugin.settings.triggerToUpdate)
+        .onChange(async (value) => {
+          this.plugin.settings.triggerToUpdate = value as TriggerToUpdate;
+          await this.plugin.saveSettings();
+        });
+    });
 
     new Setting(containerEl)
       .setName("Show a warning if the date is not found")
