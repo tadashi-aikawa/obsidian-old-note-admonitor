@@ -19,15 +19,6 @@ You can download via [BRAT].
 
 ### ⚙ Settings
 
-#### Min number of days to show a warning
-
-If today is 2022-09-11 and the date on the note is 2022-09-01.
-
-- It shows warnings if you set 10 or over
-- It doesn't show warnings if you set it under 10
-
-`Default: 180`
-
 #### Message template
 
 If today is 2022-09-11 and the date on the note is 2022-09-01,
@@ -67,7 +58,21 @@ If you set `^// updated: (?<date>[0-9]{4}/[0-9]{2}/[0-9]{2})` to `Capture group 
 
 `Default: ^// (?<date>[0-9]{4}/[0-9]{2}/[0-9]{2})`
 
-##### Exclude prefix path patterns
+#### Min number of days to show a warning
+
+If today is 2022-09-11 and the date on the note is 2022-09-01.
+
+- It shows warnings if you set 10 or over
+- It doesn't show warnings if you set it under 10
+
+`Default: 180`
+
+#### Trigger to update
+
+- `On open file`: Update a warning after switching an active file
+- `On open or save file`: Update a warning after switching an active file or (auto) saving a file
+
+#### Exclude prefix path patterns
 
 If set, It doesn't show a warning in the file whose path starts with one of the patterns. It can set multi patterns by line breaks.
 
