@@ -77,7 +77,7 @@ export default class OldNoteAdmonitorPlugin extends Plugin {
     }
 
     const numberOfDays = dayjs().diff(lastUpdated, "day");
-    if (numberOfDays > this.settings.minNumberOfDaysToShowWarning) {
+    if (numberOfDays >= this.settings.minNumberOfDaysToShowWarning) {
       const text = this.settings.messageTemplate
         .replace("${numberOfDays}", String(numberOfDays))
         .replace("${date}", lastUpdated.format("YYYY-MM-DD"));
