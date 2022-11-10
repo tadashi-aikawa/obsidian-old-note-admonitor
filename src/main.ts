@@ -54,7 +54,7 @@ export default class OldNoteAdmonitorPlugin extends Plugin {
   }
 
   async exec(file: TFile | null) {
-    const markdownView = this.appHelper.getMarkdownViewInActiveLeaf()!;
+    const markdownView = this.appHelper.getMarkdownViewInActiveLeaf();
     if (!markdownView || !file) {
       return;
     }
