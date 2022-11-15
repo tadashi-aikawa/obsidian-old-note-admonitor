@@ -58,6 +58,9 @@ export default class OldNoteAdmonitorPlugin extends Plugin {
     if (!markdownView || !file) {
       return;
     }
+    if (markdownView.file.path !== file.path) {
+      return;
+    }
 
     this.removeAdmonitor(markdownView);
     if (
