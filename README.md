@@ -12,10 +12,9 @@ This Obsidian plugin shows warnings if the note has not been updated for over sp
 
 ### ⏬ Install
 
-You can download via [BRAT].
+You can download via `Community plugins` > `Browse`.
 
-> **Warning**
-> - This plugin support Obsidian 0.16 or over
+![image](https://raw.githubusercontent.com/tadashi-aikawa/obsidian-old-note-admonitor/master/resources/install.png)
 
 ### ⚙ Settings
 
@@ -124,4 +123,3 @@ task release VERSION=1.2.3
 ```
 
 [Task]: https://github.com/go-task/task
-[BRAT]: https://github.com/TfTHacker/obsidian42-brat
