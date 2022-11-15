@@ -27,9 +27,9 @@ export default class OldNoteAdmonitorPlugin extends Plugin {
   }
 
   addListeners() {
-    this.fileOpenHandler = this.app.workspace.on("file-open", (file) =>
-      this.exec(file)
-    );
+    this.fileOpenHandler = this.app.workspace.on("file-open", (file) => {
+      this.exec(file);
+    });
     if (this.settings.triggerToUpdate === "On open or save file") {
       this.fileSaveHandler = this.app.vault.on("modify", (file) => {
         this.exec(file as TFile);
@@ -104,10 +104,10 @@ export default class OldNoteAdmonitorPlugin extends Plugin {
       case "Modified time":
         return dayjs(file.stat.mtime);
       case "Front matter":
-        const df =
-          app.metadataCache.getFileCache(file)?.frontmatter?.[
-            this.settings.frontMatterKey
-          ];
+        const fm = this.appHelper.getNoCacheFrontMatter(
+          await app.vault.cachedRead(file)
+        );
+        const df = fm?.[this.settings.frontMatterKey];
         return df ? dayjs(df) : undefined;
       case "Capture group":
         const content = await app.vault.cachedRead(file);

@@ -56,4 +56,25 @@ export class AppHelper {
   getMarkdownViewInActiveLeaf(): MarkdownView | null {
     return this.unsafeApp.workspace.getActiveViewOfType(MarkdownView);
   }
+
+  getNoCacheFrontMatter(content: string): { [key: string]: string } | null {
+    const lines = content.split("\n");
+    if (lines[0] !== "---") {
+      return null;
+    }
+
+    let frontMatter: { [key: string]: string } = {};
+    lines.slice(1).forEach((line) => {
+      if (line === "---") {
+        return frontMatter;
+      }
+
+      if (/.+: .+/.test(line)) {
+        const [key, value] = line.trim().split(":");
+        frontMatter[key] = value;
+      }
+    });
+
+    return frontMatter;
+  }
 }
