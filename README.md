@@ -4,7 +4,7 @@
 [![CI](https://github.com/tadashi-aikawa/obsidian-old-note-admonitor/workflows/CI/badge.svg)](https://github.com/tadashi-aikawa/obsidian-old-note-admonitor/actions)
 ![downloads](https://img.shields.io/github/downloads/tadashi-aikawa/obsidian-old-note-admonitor/total)
 
-This Obsidian plugin shows warnings if the note has not been updated for over specific days.
+This Obsidian plugin shows admonitions if the note has not been updated for over specific days.
 
 ![image](https://raw.githubusercontent.com/tadashi-aikawa/obsidian-old-note-admonitor/master/resources/image.png)
 
@@ -97,10 +97,14 @@ Daily Report/11/
 
 ### 🎨 Styles
 
-You can customize the style of warnings by editing the following classes.
+You can customize the style of admonitions by editing the following classes.
 
 - `.old-note-admonitor__old-note-container`
 - `.old-note-admonitor__old-note-container:before`
+- `.old-note-admonitor__old-note-container__warning`
+- `.old-note-admonitor__old-note-container__warning:before`
+- `.old-note-admonitor__old-note-container__error`
+- `.old-note-admonitor__old-note-container__error:before`
 
 For details, please show `style.css`.
 

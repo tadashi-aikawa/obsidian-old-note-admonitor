@@ -5,6 +5,10 @@ import { DEFAULT_SETTINGS, OldNoteAdmonitorTab, Settings } from "./settings";
 import { ExhaustiveError } from "./errors";
 
 const ADMONITOR_CLS = "old-note-admonitor__old-note-container";
+const ADMONITOR_WARNING_CLS = "old-note-admonitor__old-note-container__warning";
+const ADMONITOR_ERR_CLS = "old-note-admonitor__old-note-container__error";
+
+type AdmonitorType = "warning" | "error";
 
 // noinspection JSUnusedGlobalSymbols
 export default class OldNoteAdmonitorPlugin extends Plugin {
@@ -74,7 +78,7 @@ export default class OldNoteAdmonitorPlugin extends Plugin {
     const lastUpdated = await this.findDate(file);
     if (!lastUpdated) {
       if (this.settings.showWarningIfDataIsNotFound) {
-        this.insertAdmonitor(markdownView, "The date was not found");
+        this.insertAdmonitor(markdownView, "The date was not found", "error");
       }
       return;
     }
@@ -84,7 +88,7 @@ export default class OldNoteAdmonitorPlugin extends Plugin {
       const text = this.settings.messageTemplate
         .replace("${numberOfDays}", String(numberOfDays))
         .replace("${date}", lastUpdated.format("YYYY-MM-DD"));
-      this.insertAdmonitor(markdownView, text);
+      this.insertAdmonitor(markdownView, text, "warning");
     }
   }
 
@@ -92,10 +96,26 @@ export default class OldNoteAdmonitorPlugin extends Plugin {
     markdownView.containerEl.find(`.${ADMONITOR_CLS}`)?.remove();
   }
 
-  insertAdmonitor(markdownView: MarkdownView, text: string) {
+  insertAdmonitor(
+    markdownView: MarkdownView,
+    text: string,
+    type: AdmonitorType
+  ) {
+    const cls = [ADMONITOR_CLS];
+    switch (type) {
+      case "warning":
+        cls.push(ADMONITOR_WARNING_CLS);
+        break;
+      case "error":
+        cls.push(ADMONITOR_ERR_CLS);
+        break;
+      default:
+        throw new ExhaustiveError(type);
+    }
+
     const el = createDiv({
       text,
-      cls: ADMONITOR_CLS,
+      cls,
     });
     markdownView.containerEl
       .find(".view-header")
