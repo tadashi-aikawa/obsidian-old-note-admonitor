@@ -25,5 +25,8 @@
   },
   "dependencies": {
     "dayjs": "^1.11.5"
+  },
+  "volta": {
+    "node": "18.18.2"
   }
 }
