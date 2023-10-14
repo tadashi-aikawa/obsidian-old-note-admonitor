@@ -3,8 +3,9 @@
   "name": "Old Note Admonitor",
   "version": "0.7.0",
   "minAppVersion": "0.16.0",
-  "description": "This Obsidian plugin shows warnings if the note has not been updated for over specific days",
+  "description": "This Obsidian plugin shows warnings if the note has not been updated in the last specific days",
   "author": "tadashi-aikawa",
   "authorUrl": "https://github.com/tadashi-aikawa",
   "isDesktopOnly": false
 }
+
