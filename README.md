@@ -25,7 +25,7 @@ If today is 2022-09-11 and the date on the note is 2022-09-01,
 - It shows `10 days passed!` if you set `${numberOfDays} days passed!`
 - It shows `10 days passed since 2022-09-01` if you set `${numberOfDays} days passed since ${date}`
 
-`Default: The content has been no updated for over ${numberOfDays} days`
+Default: `The following content hasn't been updated in the last ${numberOfDays} days`
 
 #### Date to be referred
 
