@@ -8,7 +8,7 @@
     "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
     "version": "node version-bump.mjs && git add manifest.json versions.json",
     "prepare": "husky install",
-    "pre:commit": "tsc -noEmit -skipLibCheck"
+    "pre:push": "tsc -noEmit -skipLibCheck"
   },
   "keywords": [],
   "author": "",
