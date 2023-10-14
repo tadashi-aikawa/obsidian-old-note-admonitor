@@ -27,7 +27,7 @@ export interface Settings {
 export const DEFAULT_SETTINGS: Settings = {
   minNumberOfDaysToShowWarning: 180,
   messageTemplate:
-    "The content has been no updated for over ${numberOfDays} days",
+    "The following content hasn't been updated in the last ${numberOfDays} days",
   showWarningIfDataIsNotFound: false,
   triggerToUpdate: "On open file",
   dateToBeReferred: "Modified time",
