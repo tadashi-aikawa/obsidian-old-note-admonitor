@@ -1,5 +1,11 @@
 # Old Note Admonitor
 
+> [!IMPORTANT]
+> I rarely use Obsidian anymore.
+>
+> - Maintenance is limited to fixes for reported security vulnerabilities.
+> - No new features or non-security bug fixes are planned.
+
 [![release](https://img.shields.io/github/release/tadashi-aikawa/obsidian-old-note-admonitor.svg)](https://github.com/tadashi-aikawa/obsidian-old-note-admonitor/releases/latest)
 [![CI](https://github.com/tadashi-aikawa/obsidian-old-note-admonitor/workflows/CI/badge.svg)](https://github.com/tadashi-aikawa/obsidian-old-note-admonitor/actions)
 ![downloads](https://img.shields.io/github/downloads/tadashi-aikawa/obsidian-old-note-admonitor/total)
